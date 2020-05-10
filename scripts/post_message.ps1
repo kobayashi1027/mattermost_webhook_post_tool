@@ -39,6 +39,7 @@ $postBody =
     @{ `
         "channel" = "$($preset.TargetChannel)"; `
         "username" = "$($preset.DisplayName)"; `
+        "icon_emoji" = "$($preset.IconEmoji)"; `
         "text" = "$($postText)"; `
     } | ConvertTo-Json -Compress
 $postBody = [Text.Encoding]::UTF8.GetBytes($postBody)

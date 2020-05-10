@@ -20,6 +20,9 @@
         <style>
 body { -webkit-print-color-adjust: exact; /* Chromeで背景色まで印刷に含める設定 */ counter-reset: h2; } h1 { font-weight: bold; } h2 { counter-reset: h3; font-weight: bold; } h3 { counter-reset: h4; font-weight: bold; } h4 { counter-reset: h5; font-weight: bold; } h2:before { counter-increment: h2; content: counter(h2) ". "; } h3:before { counter-increment: h3; content: counter(h2) "." counter(h3) ". "; } h4:before { counter-increment: h4; content: counter(h2) "." counter(h3) ". " counter(h4) ". "; } :not(pre) > code { font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace; background-color: rgba(27,31,35,.05); border-radius: 3px; font-size: 85%; color: #c7254e; margin: 0; padding: .2em .4em; } primary { color: #007bff !important } secondary { color: #6c757d !important } success { color: #28a745 !important } danger { color: #dc3545 !important } warning { color: #ffc107 !important } info { color: #17a2b8 !important } newpage { display: block; page-break-before: always; } 
 </style>
+<style>
+
+</style>
         
     </head>
     <body class="vscode-light">
@@ -39,6 +42,7 @@ body { -webkit-print-color-adjust: exact; /* Chromeで背景色まで印刷に�
          <span class="hljs-string">"satou"</span>,
          <span class="hljs-string">"tanaka"</span>
      ],
+     <span class="hljs-attr">"IconEmoji"</span>: <span class="hljs-string">"robot"</span>,
      <span class="hljs-attr">"Text"</span>: <span class="hljs-string">"this is sample message!!"</span>
 }
 </div></code></pre>
@@ -70,6 +74,11 @@ body { -webkit-print-color-adjust: exact; /* Chromeで背景色まで印刷に�
 <td style="text-align:left">MentionDests</td>
 <td style="text-align:left">メンション先(メンションしない場合は空配列を指定)</td>
 <td style="text-align:left">String[]</td>
+</tr>
+<tr>
+<td style="text-align:left">IconEmoji</td>
+<td style="text-align:left">絵文字アイコン(投稿者アイコンの代わりに表示)</td>
+<td style="text-align:left">String</td>
 </tr>
 <tr>
 <td style="text-align:left">Text</td>

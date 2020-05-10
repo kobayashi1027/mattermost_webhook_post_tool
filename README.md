@@ -18,6 +18,7 @@ Incoming Webhook(内向きウェブフック)を使って特定チャンネルにメッセージを投稿する
             "satou",
             "tanaka"
         ],
+        "IconEmoji": "robot",
         "Text": "this is sample message!!"
    }
    ```  
@@ -27,6 +28,7 @@ Incoming Webhook(内向きウェブフック)を使って特定チャンネルにメッセージを投稿する
    | TargetChannel | 投稿するチャンネル名(※表示名ではなく、URLに現れている方。DMも指定可能) | String     |
    | DisplayName   | ユーザー名の部分に表示する名称                                         | String     |
    | MentionDests  | メンション先(メンションしない場合は空配列を指定)                       | String[]   |
+   | IconEmoji     | 絵文字アイコン(投稿者アイコンの代わりに表示)                           | String     |
    | Text          | 投稿するテキスト                                                       | String     |
 2. メッセージ投稿バッチ(`post_message.bat`)を引数付きで実行します。
    - 引数

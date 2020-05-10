@@ -3,5 +3,6 @@
     "TargetChannel": "check_notification",
     "DisplayName": "内向きウェブフックサンプル2",
     "MentionDests": [],
+    "IconEmoji": "robot",
     "Text": "サンプルメッセージ2です。:grinning:"
 }
