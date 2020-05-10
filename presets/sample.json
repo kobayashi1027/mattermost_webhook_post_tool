@@ -1,0 +1,9 @@
+{
+    "WebhookUrl": "http://your-mattermost-url/hooks/**************************",
+    "TargetChannel": "check_notification",
+    "DisplayName": "incoming-webhook sample",
+    "MentionDests": [
+        "channel"
+    ],
+    "Text": "サンプルメッセージです。\n改行もできます。"
+}

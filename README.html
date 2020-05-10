@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Mattermost Incoming Webhook 投稿ツール</title>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+body { -webkit-print-color-adjust: exact; /* Chromeで背景色まで印刷に含める設定 */ counter-reset: h2; } h1 { font-weight: bold; } h2 { counter-reset: h3; font-weight: bold; } h3 { counter-reset: h4; font-weight: bold; } h4 { counter-reset: h5; font-weight: bold; } h2:before { counter-increment: h2; content: counter(h2) ". "; } h3:before { counter-increment: h3; content: counter(h2) "." counter(h3) ". "; } h4:before { counter-increment: h4; content: counter(h2) "." counter(h3) ". " counter(h4) ". "; } :not(pre) > code { font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace; background-color: rgba(27,31,35,.05); border-radius: 3px; font-size: 85%; color: #c7254e; margin: 0; padding: .2em .4em; } primary { color: #007bff !important } secondary { color: #6c757d !important } success { color: #28a745 !important } danger { color: #dc3545 !important } warning { color: #ffc107 !important } info { color: #17a2b8 !important } newpage { display: block; page-break-before: always; } 
+</style>
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="mattermost-incoming-webhook-%e6%8a%95%e7%a8%bf%e3%83%84%e3%83%bc%e3%83%ab">Mattermost Incoming Webhook 投稿ツール</h1>
+<h2 id="%e3%81%93%e3%82%8c%e3%81%af%e3%81%aa%e3%81%ab">これはなに？</h2>
+<p>Incoming Webhook(内向きウェブフック)を使って特定チャンネルにメッセージを投稿するツールです。</p>
+<h2 id="%e4%ba%8b%e5%89%8d%e6%ba%96%e5%82%99">事前準備</h2>
+<p>「統合機能」より「内向きウェブフック」を作成し、URLを控えておいてください。</p>
+<h2 id="%e4%bd%bf%e3%81%84%e6%96%b9">使い方</h2>
+<ol>
+<li><code>presets/sample.json</code>を参考に、<code>presets/***.json</code>を作成してください。<pre><code class="language-json"><div>(設定例)
+{
+     <span class="hljs-attr">"WebhookUrl"</span>: <span class="hljs-string">"http://your-mattermost-url/hooks/**************************"</span>,
+     <span class="hljs-attr">"TargetChannel"</span>: <span class="hljs-string">"town-square"</span>,
+     <span class="hljs-attr">"DisplayName"</span>: <span class="hljs-string">"Webhook Sample"</span>,
+     <span class="hljs-attr">"MentionDests"</span>: [
+         <span class="hljs-string">"satou"</span>,
+         <span class="hljs-string">"tanaka"</span>
+     ],
+     <span class="hljs-attr">"Text"</span>: <span class="hljs-string">"this is sample message!!"</span>
+}
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Key</th>
+<th style="text-align:left">説明</th>
+<th style="text-align:left">Value Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">WebhookUrl</td>
+<td style="text-align:left">WebhookのURL(事前準備で控えておいたもの)</td>
+<td style="text-align:left">String</td>
+</tr>
+<tr>
+<td style="text-align:left">TargetChannel</td>
+<td style="text-align:left">投稿するチャンネル名(※表示名ではなく、URLに現れている方。DMも指定可能)</td>
+<td style="text-align:left">String</td>
+</tr>
+<tr>
+<td style="text-align:left">DisplayName</td>
+<td style="text-align:left">ユーザー名の部分に表示する名称</td>
+<td style="text-align:left">String</td>
+</tr>
+<tr>
+<td style="text-align:left">MentionDests</td>
+<td style="text-align:left">メンション先(メンションしない場合は空配列を指定)</td>
+<td style="text-align:left">String[]</td>
+</tr>
+<tr>
+<td style="text-align:left">Text</td>
+<td style="text-align:left">投稿するテキスト</td>
+<td style="text-align:left">String</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>メッセージ投稿バッチ(<code>post_message.bat</code>)を引数付きで実行します。
+<ul>
+<li>引数
+<ul>
+<li>第1引数: プリセット名(<code>presets/***.json</code>)の<code>***</code>の部分</li>
+<li>第2引数(オプショナル): 投稿するテキスト(※指定した場合、プリセットjsonに記載したテキストの代わりにこちらが投稿されます)</li>
+</ul>
+</li>
+<li>実行例<br>
+プリセット<code>sample.json</code>を使って投稿します。<pre><code class="language-bat"><div>&gt; post_message.bat sample
+</div></code></pre>
+投稿先はそのまま、動的にテキストを変えたい場合、投稿するテキストを第2引数に直接指定します。<pre><code class="language-bat"><div>&gt; post_message.bat sample こんにちは、世界
+</div></code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="%e3%81%9d%e3%81%ae%e4%bb%96">その他</h2>
+<p>質問、改善要望などあれば小林まで。</p>
+
+    </body>
+    </html>
